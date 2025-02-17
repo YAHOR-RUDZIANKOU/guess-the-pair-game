@@ -14,18 +14,29 @@ body {
 
 /* ------level buttons------------------- */
 
-
 .container {
-  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.wrapper{
+  width: 330px;
 }
 
 .header__title {
-  font-size: 30px;
+  font-size: 40px;
+  width: 330px;
 }
 
 .title {
   color: white;
   text-align: center;
+}
+
+.main{
+  width: 330px;
 }
 
 .main__title {
@@ -52,4 +63,66 @@ body {
   transition: background-color 0.3s linear;
   background-color: #222;
   color: white;
-} 
+}
+
+
+/* ----------создание доски с картами-------------- */
+
+.wrapper__card{
+  width: 330px;
+  gap: 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.wrapper__item{
+  transition: transform 1s;
+  width: 75px;
+  height: 75px;
+  background-color: fuchsia;
+  border-radius: 10%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.side{
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+}
+
+.side i{
+  font-size: 40px;
+}
+
+.back{
+  transform: rotateY(180deg);
+  border-radius: 10%;
+  background-color: #5dc6ff;
+}
+
+.flipped{
+  transform: rotateY(180deg);
+}
+
+.btnRest{
+  font-size: 20px;
+  margin-top: 30px;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+/* --------------------------------------------- */
+
+.trueBaground{
+  background-color: lawngreen;
+}
+
