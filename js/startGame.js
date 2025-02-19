@@ -1,5 +1,6 @@
-import { shuffleArray, duplicateArray, createIconsArray } from "./utils.js";
+import { shuffleArray, duplicateArray, createIconsArray, fireConfetti } from "./utils.js";
 import { createCards } from "./createCards.js";
+import { createGameMenu } from "./gameMenu.js";
 
 export const startGame = (dif) => {
   const mainWrapper = document.querySelector(".main");
@@ -58,15 +59,17 @@ export const startGame = (dif) => {
         }
       }
 
-      if(wrapperItem.every((elem)=>elem.classList.contains('flipped'))){
-        confetti();
+      if (wrapperItem.every((elem) => elem.classList.contains("flipped"))) {
+        setTimeout(() => {
+          fireConfetti();
+          let music = new Audio("../music/mus.mp3");
+          music.play();
+        }, 1000);
+
+        setTimeout(() => {
+          createGameMenu();
+        }, 17000);
       }
-
-
-
-
-
-
     });
   });
 };
