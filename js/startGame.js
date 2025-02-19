@@ -60,6 +60,10 @@ export const startGame = (dif) => {
       }
 
       if (wrapperItem.every((elem) => elem.classList.contains("flipped"))) {
+        const blocker = document.createElement("div");
+        blocker.classList.add("blocker");
+        document.body.appendChild(blocker);
+
         setTimeout(() => {
           fireConfetti();
           let music = new Audio("../music/mus.mp3");
@@ -68,7 +72,8 @@ export const startGame = (dif) => {
 
         setTimeout(() => {
           createGameMenu();
-        }, 17000);
+          document.body.removeChild(blocker);
+        }, 16000);
       }
     });
   });
