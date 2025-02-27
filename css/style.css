@@ -21,7 +21,7 @@ body {
   height: 100vh;
 }
 
-.wrapper{
+.wrapper {
   width: 330px;
 }
 
@@ -35,7 +35,7 @@ body {
   text-align: center;
 }
 
-.main{
+.main {
   width: 330px;
 }
 
@@ -65,10 +65,9 @@ body {
   color: white;
 }
 
-
 /* ----------создание доски с картами-------------- */
 
-.wrapper__card{
+.wrapper__card {
   width: 330px;
   gap: 10px;
   margin: 0 auto;
@@ -79,7 +78,7 @@ body {
   margin-top: 25px;
 }
 
-.wrapper__item{
+.wrapper__item {
   transition: transform 1s;
   width: 75px;
   height: 75px;
@@ -89,7 +88,7 @@ body {
   position: relative;
 }
 
-.side{
+.side {
   position: absolute;
   display: flex;
   width: 100%;
@@ -99,40 +98,71 @@ body {
   backface-visibility: hidden;
 }
 
-.side i{
+.side i {
   font-size: 40px;
 }
 
-.back{
+.back {
   transform: rotateY(180deg);
   border-radius: 10%;
   background-color: #5dc6ff;
 }
 
-.flipped{
+.flipped {
   transform: rotateY(180deg);
 }
 
-.btnRest{
+.btnRest {
   font-size: 20px;
   margin-top: 30px;
   color: white;
   display: flex;
   justify-content: center;
 }
-/* --------------------------------------------- */
 
-.trueBaground{
+.trueBaground {
   background-color: lawngreen;
 }
+/* --------------------------------------------- */
 
-.blocker {
+.record__wrapper {
+  width: 200px;
+  height: 235px;
+  background-color: #222;
+  padding: 10px;
+  border-radius: 10%;
+  border: 1px solid #333;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0);
-  z-index: 9999; 
-  pointer-events: all; 
+  z-index: 999;
+  top: -100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 1s ease;
+}
+
+.addAnim {
+  top: 50%;
+}
+
+.record__title {
+  color: #ddd;
+  font-size: 20px;
+}
+
+.record__item {
+  color: #ddd;
+  font-size: 20px;
+}
+
+.record__container {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.record__items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }

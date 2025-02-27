@@ -13,8 +13,8 @@ export const duplicateArray = (arr) => {
 
 export const createIconsArray = (dif) => {
   let arrIcons = ["fa-birthday-cake", "fa-apple-alt", "fa-pizza-slice", "fa-ice-cream", "fa-hamburger", "fa-wine-glass", "fa-fish", "fa-glass-whiskey"];
-  if (dif === 4) {
-    return arrIcons.slice(0, 2);
+  if (dif === 2) {
+    return arrIcons.slice(0, 1);
   } else if (dif === 12) {
     return arrIcons.slice(0, 6);
   } else if (dif === 14) {
@@ -26,15 +26,15 @@ export const createIconsArray = (dif) => {
 
 // fireConfetti - логика для confetti
 export const fireConfetti = () => {
-  let duration = 15 * 1000;
+  let duration = 8000;
   let animationEnd = Date.now() + duration;
   let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-  
+
   function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
   }
-  
-  let interval = setInterval(function() {
+
+  let interval = setInterval(function () {
     let timeLeft = animationEnd - Date.now();
     if (timeLeft <= 0) {
       clearInterval(interval);
@@ -43,4 +43,54 @@ export const fireConfetti = () => {
     confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
     confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
   }, 250);
+};
+
+export const updateRecords = (time) => {
+  if (localStorage.getItem("gameResult") === null) {
+    let arr = [time];
+    localStorage.setItem("gameResult", JSON.stringify(arr));
+    return arr;
+  } else {
+    let pastRecords = JSON.parse(localStorage.getItem("gameResult"));
+    // console.log(pastRecords)
+    pastRecords.push(time);
+    pastRecords.sort((a, b) => a - b);
+    let newRecords = pastRecords.slice(0, 5);
+    localStorage.setItem("gameResult", JSON.stringify(newRecords));
+    // localStorage.clear()
+    return newRecords;
+  }
+};
+
+export const createRecordList = (arr) => {
+  console.log('1')
+  let recordWrap=document.createElement('div');
+  recordWrap.classList.add('record__wrapper')
+
+  let recordContainer=document.createElement('div');
+  recordContainer.classList.add('record__container');
+
+  let recordTitle=document.createElement('div');
+  recordTitle.classList.add('record__title');
+  recordTitle.innerText='Your records:'
+
+  let recordItems=document.createElement('div');
+  recordItems.classList.add('record__items');
+
+  for(let i=0;i<arr.length;i++){
+    let recordItem=document.createElement('div');
+    recordItem.classList.add('record__item');
+    recordItem.innerText=`${i+1}) ${arr[i]} seconds`;
+
+    recordItems.appendChild(recordItem)
+  }
+
+  recordContainer.appendChild(recordTitle);
+  recordContainer.appendChild(recordItems);
+
+  recordWrap.appendChild(recordContainer)
+
+  document.body.insertBefore(recordWrap,document.body.firstChild);
+
+  return recordWrap;
 };
