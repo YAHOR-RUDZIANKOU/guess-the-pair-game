@@ -76,9 +76,9 @@ export const startGame = (dif) => {
 
       if (wrapperItem.every((elem) => elem.classList.contains("flipped"))) {
         let resultTime = +((Date.now() - startGame) / 1000).toFixed(2);
-        let topTimes = updateRecords(resultTime);
+        let topTimes = updateRecords(resultTime,dif);
         let recordWrap = createRecordList(topTimes);
-
+        
         setTimeout(() => {
           fireConfetti();
           let music = new Audio("../music/mus.mp3");

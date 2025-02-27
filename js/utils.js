@@ -45,52 +45,52 @@ export const fireConfetti = () => {
   }, 250);
 };
 
-export const updateRecords = (time) => {
-  if (localStorage.getItem("gameResult") === null) {
+export const updateRecords = (time, dif) => {
+  if (localStorage.getItem(`gameResult${dif}`) === null) {
     let arr = [time];
-    localStorage.setItem("gameResult", JSON.stringify(arr));
+    localStorage.setItem(`gameResult${dif}`, JSON.stringify(arr));
     return arr;
   } else {
-    let pastRecords = JSON.parse(localStorage.getItem("gameResult"));
+    let pastRecords = JSON.parse(localStorage.getItem(`gameResult${dif}`));
     // console.log(pastRecords)
     pastRecords.push(time);
     pastRecords.sort((a, b) => a - b);
     let newRecords = pastRecords.slice(0, 5);
-    localStorage.setItem("gameResult", JSON.stringify(newRecords));
+    localStorage.setItem(`gameResult${dif}`, JSON.stringify(newRecords));
     // localStorage.clear()
     return newRecords;
   }
 };
 
 export const createRecordList = (arr) => {
-  console.log('1')
-  let recordWrap=document.createElement('div');
-  recordWrap.classList.add('record__wrapper')
+  // console.log('1')
+  let recordWrap = document.createElement("div");
+  recordWrap.classList.add("record__wrapper");
 
-  let recordContainer=document.createElement('div');
-  recordContainer.classList.add('record__container');
+  let recordContainer = document.createElement("div");
+  recordContainer.classList.add("record__container");
 
-  let recordTitle=document.createElement('div');
-  recordTitle.classList.add('record__title');
-  recordTitle.innerText='Your records:'
+  let recordTitle = document.createElement("div");
+  recordTitle.classList.add("record__title");
+  recordTitle.innerText = "Your records:";
 
-  let recordItems=document.createElement('div');
-  recordItems.classList.add('record__items');
+  let recordItems = document.createElement("div");
+  recordItems.classList.add("record__items");
 
-  for(let i=0;i<arr.length;i++){
-    let recordItem=document.createElement('div');
-    recordItem.classList.add('record__item');
-    recordItem.innerText=`${i+1}) ${arr[i]} seconds`;
+  for (let i = 0; i < arr.length; i++) {
+    let recordItem = document.createElement("div");
+    recordItem.classList.add("record__item");
+    recordItem.innerText = `${i + 1}) ${arr[i]} seconds`;
 
-    recordItems.appendChild(recordItem)
+    recordItems.appendChild(recordItem);
   }
 
   recordContainer.appendChild(recordTitle);
   recordContainer.appendChild(recordItems);
 
-  recordWrap.appendChild(recordContainer)
+  recordWrap.appendChild(recordContainer);
 
-  document.body.insertBefore(recordWrap,document.body.firstChild);
+  document.body.insertBefore(recordWrap, document.body.firstChild);
 
   return recordWrap;
 };
