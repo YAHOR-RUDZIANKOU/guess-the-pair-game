@@ -1,8 +1,13 @@
-import { shuffleArray, duplicateArray, createIconsArray, fireConfetti } from "./utils.js";
+import { shuffleArray, duplicateArray, createIconsArray, fireConfetti, updateRecords, createRecordList } from "./utils.js";
 import { createCards } from "./createCards.js";
 import { createGameMenu } from "./gameMenu.js";
 
 export const startGame = (dif) => {
+  const musicClickButton = new Audio("../music/clickBTN.mp3");
+  const musicWinChoose = new Audio("../music/winChoose.mp3");
+  const musicFailChoose = new Audio("../music/failChoose.mp3");
+  let startGame = Date.now();
+  // console.log(typeof(startGame))
   const mainWrapper = document.querySelector(".main");
   mainWrapper.innerHTML = "";
 
@@ -23,6 +28,9 @@ export const startGame = (dif) => {
   // логика игры
   wrapperItem.forEach((value, index) => {
     value.addEventListener("click", (event) => {
+      musicClickButton.currentTime = 0;
+      musicClickButton.play();
+
       const front = event.target.closest(".front");
       // когда видна передняя часть
       if (front) {
@@ -46,6 +54,8 @@ export const startGame = (dif) => {
               isFirstClick = false;
               backSideFIR.classList.add("trueBaground");
               backSideSEC.classList.add("trueBaground");
+              musicWinChoose.currentTime = 0;
+              musicWinChoose.play();
               // console.log("мы равны");
             }, 1000);
           } else {
@@ -53,6 +63,11 @@ export const startGame = (dif) => {
               wrapperItem[firstClick].classList.remove("flipped");
               wrapperItem[secondClick].classList.remove("flipped");
               isFirstClick = false;
+              musicFailChoose.currentTime = 0;
+              musicFailChoose.play();
+              setTimeout(() => {
+                musicFailChoose.pause();
+              }, 500);
               // console.log("мы не равны");
             }, 1000);
           }
@@ -60,20 +75,27 @@ export const startGame = (dif) => {
       }
 
       if (wrapperItem.every((elem) => elem.classList.contains("flipped"))) {
-        const blocker = document.createElement("div");
-        blocker.classList.add("blocker");
-        document.body.appendChild(blocker);
+        let resultTime = +((Date.now() - startGame) / 1000).toFixed(2);
+        let topTimes = updateRecords(resultTime);
+        let recordWrap = createRecordList(topTimes);
 
         setTimeout(() => {
           fireConfetti();
           let music = new Audio("../music/mus.mp3");
           music.play();
+          recordWrap.classList.add("addAnim");
+          setTimeout(() => {
+            music.pause();
+          }, 8000);
         }, 1000);
 
         setTimeout(() => {
           createGameMenu();
-          document.body.removeChild(blocker);
-        }, 16000);
+        }, 9000);
+
+        setTimeout(() => {
+          recordWrap.classList.remove("addAnim");
+        }, 5000);
       }
     });
   });
