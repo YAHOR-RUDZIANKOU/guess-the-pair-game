@@ -17,6 +17,7 @@ export const startGame = (dif) => {
   shuffleArray(doublearrayIcons);
   createCards(doublearrayIcons, mainWrapper);
 
+  const btnReset=document.querySelector('.button');
   const wrapperItem = Array.from(document.querySelectorAll(".wrapper__item"));
 
   let firstClick = null;
@@ -81,6 +82,7 @@ export const startGame = (dif) => {
         
         setTimeout(() => {
           fireConfetti();
+          btnReset.disabled=true
           let music = new Audio("../music/mus.mp3");
           music.play();
           recordWrap.classList.add("addAnim");
