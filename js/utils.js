@@ -13,8 +13,8 @@ export const duplicateArray = (arr) => {
 
 export const createIconsArray = (dif) => {
   let arrIcons = ["fa-birthday-cake", "fa-apple-alt", "fa-pizza-slice", "fa-ice-cream", "fa-hamburger", "fa-wine-glass", "fa-fish", "fa-glass-whiskey"];
-  if (dif === 2) {
-    return arrIcons.slice(0, 1);
+  if (dif === 10) {
+    return arrIcons.slice(0, 5);
   } else if (dif === 12) {
     return arrIcons.slice(0, 6);
   } else if (dif === 14) {
