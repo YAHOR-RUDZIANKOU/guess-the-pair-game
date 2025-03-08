@@ -141,7 +141,7 @@ body {
 }
 
 .addAnim {
-  top: 50%;
+  top: 40%;
 }
 
 .record__title {
@@ -165,4 +165,23 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.record__click{
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s linear;
 }

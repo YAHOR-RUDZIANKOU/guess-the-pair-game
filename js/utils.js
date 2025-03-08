@@ -94,3 +94,11 @@ export const createRecordList = (arr) => {
 
   return recordWrap;
 };
+
+export const createRecordClick = (mainWrap,count) => {
+  let div=document.createElement('div');
+  div.classList.add('record__click' ,'fade-in');
+  div.innerHTML=`Всего кликов: ${count}`;
+
+  mainWrap.appendChild(div);
+};

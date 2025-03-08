@@ -42,4 +42,6 @@ export const createCards = (arr, mainWrapper) => {
       createGameMenu();
     }
   });
+
+  return mainWrapper;
 };

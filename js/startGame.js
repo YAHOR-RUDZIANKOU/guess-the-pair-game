@@ -1,8 +1,9 @@
-import { shuffleArray, duplicateArray, createIconsArray, fireConfetti, updateRecords, createRecordList } from "./utils.js";
+import { shuffleArray, duplicateArray, createIconsArray, fireConfetti, updateRecords, createRecordList ,createRecordClick} from "./utils.js";
 import { createCards } from "./createCards.js";
 import { createGameMenu } from "./gameMenu.js";
 
 export const startGame = (dif) => {
+  let count=0;
   const musicClickButton = new Audio("../music/clickBTN.mp3");
   const musicWinChoose = new Audio("../music/winChoose.mp3");
   const musicFailChoose = new Audio("../music/failChoose.mp3");
@@ -15,7 +16,7 @@ export const startGame = (dif) => {
   const arrayIcons = createIconsArray(dif);
   const doublearrayIcons = duplicateArray(arrayIcons);
   shuffleArray(doublearrayIcons);
-  createCards(doublearrayIcons, mainWrapper);
+  let createCardWrapper=createCards(doublearrayIcons, mainWrapper);
 
   const btnReset=document.querySelector('.button');
   const wrapperItem = Array.from(document.querySelectorAll(".wrapper__item"));
@@ -31,7 +32,8 @@ export const startGame = (dif) => {
     value.addEventListener("click", (event) => {
       musicClickButton.currentTime = 0;
       musicClickButton.play();
-
+      count++;
+      // console.log(count)
       const front = event.target.closest(".front");
       // когда видна передняя часть
       if (front) {
@@ -79,6 +81,8 @@ export const startGame = (dif) => {
         let resultTime = +((Date.now() - startGame) / 1000).toFixed(2);
         let topTimes = updateRecords(resultTime,dif);
         let recordWrap = createRecordList(topTimes);
+        
+        createRecordClick(createCardWrapper,count)
         
         setTimeout(() => {
           fireConfetti();
