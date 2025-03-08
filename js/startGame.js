@@ -36,7 +36,7 @@ export const startGame = (dif) => {
       musicClickButton.currentTime = 0;
       musicClickButton.play();
       count++;
-      console.log(count)
+      // console.log(count)
       const front = event.target.closest(".front");
       // когда видна передняя часть
       if (front) {
