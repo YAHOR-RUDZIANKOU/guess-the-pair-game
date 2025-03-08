@@ -7,6 +7,7 @@ export const startGame = (dif) => {
   const musicClickButton = new Audio("music/clickBTN.mp3");
   const musicWinChoose = new Audio("music/winChoose.mp3");
   const musicFailChoose = new Audio("music/failChoose.mp3");
+  let music = new Audio("music/mus.mp3");
   let startGame = Date.now();
   // console.log(typeof(startGame))
   const mainWrapper = document.querySelector(".main");
@@ -93,7 +94,6 @@ export const startGame = (dif) => {
         setTimeout(() => {
           fireConfetti();
           btnReset.disabled=true
-          let music = new Audio("music/mus.mp3");
           music.play();
           recordWrap.classList.add("addAnim");
           setTimeout(() => {
