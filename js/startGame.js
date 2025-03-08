@@ -24,16 +24,18 @@ export const startGame = (dif) => {
   let firstClick = null;
   let secondClick = null;
   let isFirstClick = false;
+  let isChecking = false;
   let backSideFIR;
   let backSideSEC;
 
   // логика игры
   wrapperItem.forEach((value, index) => {
     value.addEventListener("click", (event) => {
+      if (isChecking) return;
       musicClickButton.currentTime = 0;
       musicClickButton.play();
       count++;
-      // console.log(count)
+      console.log(count)
       const front = event.target.closest(".front");
       // когда видна передняя часть
       if (front) {
@@ -53,7 +55,9 @@ export const startGame = (dif) => {
           const iconSEC = backSideSEC.firstElementChild;
 
           if (iconFIR.className === iconSEC.className) {
+            isChecking = true;
             setTimeout(() => {
+              isChecking = false;
               isFirstClick = false;
               backSideFIR.classList.add("trueBaground");
               backSideSEC.classList.add("trueBaground");
@@ -62,7 +66,9 @@ export const startGame = (dif) => {
               // console.log("мы равны");
             }, 1000);
           } else {
+            isChecking = true;
             setTimeout(() => {
+              isChecking = false;
               wrapperItem[firstClick].classList.remove("flipped");
               wrapperItem[secondClick].classList.remove("flipped");
               isFirstClick = false;
