@@ -93,7 +93,7 @@ export const startGame = (dif) => {
         setTimeout(() => {
           fireConfetti();
           btnReset.disabled=true
-          let music = new Audio("../music/mus.mp3");
+          let music = new Audio("/music/mus.mp3");
           music.play();
           recordWrap.classList.add("addAnim");
           setTimeout(() => {
